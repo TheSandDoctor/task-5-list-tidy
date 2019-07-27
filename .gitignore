@@ -1,1 +1,15 @@
 credentials.txt
+CITconfig.pyc
+backports/
+certifi/
+chardet/
+configparser.py
+configparser.pyc
+idna/
+mwclient/
+mwparserfromhell/
+oauthlib/
+requests/
+requests_oauthlib/
+urllib3/
+wikitools/

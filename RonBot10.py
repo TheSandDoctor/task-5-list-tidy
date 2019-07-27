@@ -10,12 +10,12 @@ import mwparserfromhell
 import datetime
 import sys
 import CITconfig
-
+from mwclient import errors
 
 site = wiki.Wiki() #Tell Python to use the English Wikipedia's API
 
 config = configparser.RawConfigParser()
-config.read('/data/project/thesandbot/british_american_rename/credentials.txt')
+config.read('credentials.txt')
 try:
     site.login(config.get('enwiki_sandbot','username'), config.get('enwiki_sandbot', 'password'))
 except errors.LoginError as e:
@@ -31,9 +31,9 @@ def pnt(s):
         print(s.encode('utf-8'))
 
 def startAllowed():
-    h_page = site.Pages['User:TheSandBot/status']
-    text = h_page.text()
-    return bool(json.loads(text)["run"]["british_american_move_converter"])
+    h_page = page.Page(site, 'User:TheSandBot/status')
+    text = h_page.getWikiText()
+    return bool(json.loads(text)["run"]["ronbot10"])
 
 def allow_bots(text, user):
     user = user.lower().strip()
@@ -274,6 +274,8 @@ def main():
     #parameters for API request
     search='User:JL-Bot/Questionable.cfg'
     #search='User:RonBot/Questionable.cfg'
+    Process(search)
+    search='User:JL-Bot/Publishers.cfg'
     Process(search)
 
 if __name__ == "__main__":
