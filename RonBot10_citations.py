@@ -253,7 +253,7 @@ def main():
 
 
     #parameters for API request
-    search='User:JL-Bot/Citations.cfg'
+    search='User talk:JL-Bot/Citations.cfg'
     Process(search)
 
     CITconfig.datedlist.append("<!-- Report end-->")
