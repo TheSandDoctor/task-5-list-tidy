@@ -242,22 +242,41 @@ def getwritepage(search):
     return
 
 
-def main():
+def run(title):
     go = startAllowed() #Check if task is enabled
     if go == False:
         sys.exit(1)
     getJCWdate()
-    getwritepage('User talk:JL-Bot/Citations.cfg')
+    getwritepage(title)
     CITconfig.datedlist.append("<!-- Report begin-->")
     CITconfig.datedlist.append("The following exclusions are likely no longer needed:")
 
 
     #parameters for API request
-    search='User talk:JL-Bot/Citations.cfg'
-    Process(search)
+    Process(title)
 
     CITconfig.datedlist.append("<!-- Report end-->")
-    writepage('User talk:JL-Bot/Citations.cfg',CITconfig.datedlist)
+    writepage(title,CITconfig.datedlist)
+
+
+def main():
+    run('User:JL-Bot/Citations.cfg')
+    run('User talk:JL-Bot/Citations.cfg')
+    #go = startAllowed() #Check if task is enabled
+    #if go == False:
+    #    sys.exit(1)
+    #getJCWdate()
+    #getwritepage('User:JL-Bot/Citations.cfg')
+    #CITconfig.datedlist.append("<!-- Report begin-->")
+    #CITconfig.datedlist.append("The following exclusions are likely no longer needed:")
+
+
+    #parameters for API request
+    #search='User:JL-Bot/Citations.cfg'
+    #Process(search)
+
+    #CITconfig.datedlist.append("<!-- Report end-->")
+    #writepage('User:JL-Bot/Citations.cfg',CITconfig.datedlist)
 
 if __name__ == "__main__":
     with warnings.catch_warnings():
