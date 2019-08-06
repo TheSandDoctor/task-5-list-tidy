@@ -25,11 +25,13 @@ def pnt(s):
         print(s.encode('utf-8'))
 
 def startAllowed():
+    """Checks to ensure that the bot's control panel bool is enabled/true"""
     h_page = page.Page(site, 'User:TheSandBot/status')
     text = h_page.getWikiText()
     return bool(json.loads(text)["run"]["ronbot10"])
 
 def allow_bots(text, user):
+    """Checks if the bot (user) is allowed to edit the given page based on its content (text)"""
     user = user.lower().strip()
     text = mwparserfromhell.parse(text)
     for tl in text.filter_templates():
@@ -257,7 +259,7 @@ def run(title):
 
     CITconfig.datedlist.append("<!-- Report end-->")
     writepage(title,CITconfig.datedlist)
-
+    CITconfig.wipe()
 
 def main():
     run('User:JL-Bot/Citations.cfg')
@@ -281,4 +283,8 @@ def main():
 if __name__ == "__main__":
     with warnings.catch_warnings():
         warnings.simplefilter("ignore", FutureWarning)
-        main()
+        try:
+            main()
+        except KeyboardInterrupt:
+            CITconfig.wipe()
+            print("\nCancelled with Ctrl + C")
